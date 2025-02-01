@@ -64,10 +64,42 @@ function agregarMovimiento(){
                 if(checkbox.checked){
                     nuevoMovimiento.style.textDecoration = "line-through";
                     nuevoMovimiento.style.color = "gray";
+
+                    //Obtener datos
+
+                    let cuentaAfectada = document.getElementById(casillaCuenta.textContent);
+                    let saldoActual = parseFloat(cuentaAfectada.dataset.valor);
+                    let valorMovimiento = parseFloat(casillaValor.textContent);
+
+                    //actualizar saldo segun naturaleza del movimiento
+                    if(casillaTipo.textContent === "ingreso"){
+                        cuentaAfectada.dataset.valor = saldoActual + valorMovimiento;
+                    }else if(casillaTipo.textContent === "egreso"){
+                        cuentaAfectada.dataset.valor = saldoActual - valorMovimiento;
+                    }
+
+                    cuentaAfectada.textContent = cuentaAfectada.dataset.valor;
+
                 }else{
+
+                    //revertir cambios
+
                     nuevoMovimiento.style.textDecoration = "none";
                     nuevoMovimiento.style.color = "black";
+
+                    let cuentaAfectada = document.getElementById(casillaCuenta.textContent);
+                    let saldoActual = parseFloat(cuentaAfectada.dataset.valor);
+                    let valorMovimiento = parseFloat(casillaValor.textContent);
+
+                    if(casillaTipo.textContent === "ingreso"){
+                        cuentaAfectada.dataset.valor = saldoActual - valorMovimiento;
+                    }else if(casillaTipo.textContent === "egreso"){
+                        cuentaAfectada.dataset.valor = saldoActual + valorMovimiento;
+                    }
+
+                    cuentaAfectada.textContent = cuentaAfectada.dataset.valor;
                 }
+                actualizarSaldoTotal();
             }
         )
 
