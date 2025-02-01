@@ -41,7 +41,6 @@ function agregarMovimiento(){
 
         const checkbox = document.createElement("input");
         checkbox.type = "checkbox";
-
         const casillaCheck = document.createElement("td");
         
         const casillaTipo = document.createElement("td");
@@ -58,6 +57,10 @@ function agregarMovimiento(){
 
         const casillaCuenta = document.createElement("td");
         casillaCuenta.textContent = cuentaMovimiento.value;
+
+        const botonEliminar = document.createElement("button");
+        botonEliminar.textContent = "eliminar";
+        const casillaBotonEliminar = document.createElement("td");
 
         //funcionalidad check box
         checkbox.addEventListener("change", ()=>{
@@ -107,12 +110,15 @@ function agregarMovimiento(){
 
         casillaCheck.appendChild(checkbox);
 
+        casillaBotonEliminar.appendChild(botonEliminar);
+
         nuevoMovimiento.appendChild(casillaCheck);
         nuevoMovimiento.appendChild(casillaTipo);
         nuevoMovimiento.appendChild(casillaFecha);
         nuevoMovimiento.appendChild(casillaDescripcion);
         nuevoMovimiento.appendChild(casillaValor);
         nuevoMovimiento.appendChild(casillaCuenta);
+        nuevoMovimiento.appendChild(casillaBotonEliminar);
 
         listaMovimientos.appendChild(nuevoMovimiento);
 
