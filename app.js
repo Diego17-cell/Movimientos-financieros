@@ -34,6 +34,9 @@ function agregarMovimiento(){
         alert("Por favor completa los campos");
         return;
     }else{
+
+        //creacion de elementos para el nuevo movimiento
+
         const nuevoMovimiento = document.createElement("tr");
 
         const checkbox = document.createElement("input");
@@ -56,6 +59,19 @@ function agregarMovimiento(){
         const casillaCuenta = document.createElement("td");
         casillaCuenta.textContent = cuentaMovimiento.value;
 
+        //funcionalidad check box
+        checkbox.addEventListener("change", ()=>{
+                if(checkbox.checked){
+                    nuevoMovimiento.style.textDecoration = "line-through";
+                    nuevoMovimiento.style.color = "gray";
+                }else{
+                    nuevoMovimiento.style.textDecoration = "none";
+                    nuevoMovimiento.style.color = "black";
+                }
+            }
+        )
+
+        //asignacion de hijos
 
         casillaCheck.appendChild(checkbox);
 
@@ -68,6 +84,8 @@ function agregarMovimiento(){
 
         listaMovimientos.appendChild(nuevoMovimiento);
 
+        //limpiar campos
+
         tipo.value = "";
         fecha.value = "";
         descripcion.value = "";
@@ -77,3 +95,4 @@ function agregarMovimiento(){
 }
 
 botonAgregarMovimiento.addEventListener("click", agregarMovimiento);
+
