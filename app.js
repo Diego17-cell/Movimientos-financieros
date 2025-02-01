@@ -60,6 +60,12 @@ function agregarMovimiento(){
 
         const botonEliminar = document.createElement("button");
         botonEliminar.textContent = "eliminar";
+        //funcionalidad de eliminar
+        botonEliminar.addEventListener("click", ()=>{
+                nuevoMovimiento.remove();
+            }
+        );
+
         const casillaBotonEliminar = document.createElement("td");
 
         //funcionalidad check box
