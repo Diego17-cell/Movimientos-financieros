@@ -13,15 +13,16 @@ listaMovimientos = document.getElementById("lista-movimientos");
 
 function actualizarSaldoTotal(){
     sumaSaldos = parseFloat(saldoFiducia.dataset.valor) + parseFloat(saldoAhorros.dataset.valor) + parseFloat(saldoEfectivo.dataset.valor);
-    saldoTotal.textContent = sumaSaldos;
+    saldoTotal.textContent = formatoPesosColombianos(sumaSaldos);
 }
 
 function actualizarSaldo(){
     cuenta = document.getElementById("cuenta-actualizar").value;
     valor = document.getElementById("valor-actualizar").value;
     celda = document.getElementById(cuenta);
-
-    celda.textContent = celda.dataset.valor = parseFloat(valor) || 0;
+    
+    celda.dataset.valor = parseFloat(valor) || 0;
+    celda.textContent = formatoPesosColombianos(celda.dataset.valor);
 
     actualizarSaldoTotal();
 
@@ -140,3 +141,20 @@ function agregarMovimiento(){
 
 botonAgregarMovimiento.addEventListener("click", agregarMovimiento);
 
+//funcion para dar formato en pesos colombianos separado con . de miles
+function formatoPesosColombianos(valor) {
+    // Asegurarse de que el valor sea un número
+    if (isNaN(valor)) {
+        console.log("El valor ingresado no es un número válido.");
+        return;
+    }
+
+    // Crear el formato de pesos colombianos con separadores de miles
+    const formato = new Intl.NumberFormat('es-CO', {
+        style: 'currency',
+        currency: 'COP'
+    });
+
+    // Retornar el valor formateado
+    return formato.format(valor);
+}
