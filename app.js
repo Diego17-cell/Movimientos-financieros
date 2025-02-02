@@ -16,17 +16,29 @@ function actualizarSaldoTotal(){
     saldoTotal.textContent = formatoPesosColombianos(sumaSaldos);
 }
 
-function actualizarSaldo(){
-    cuenta = document.getElementById("cuenta-actualizar").value;
-    valor = document.getElementById("valor-actualizar").value;
-    celda = document.getElementById(cuenta);
+function actualizarSaldo() {
+    let cuentaInput = document.getElementById("cuenta-actualizar"); // Obtener el input
+    let valorInput = document.getElementById("valor-actualizar"); // Obtener el input
     
-    celda.dataset.valor = parseFloat(valor) || 0;
-    celda.textContent = formatoPesosColombianos(celda.dataset.valor);
+    let cuenta = cuentaInput.value; // Obtener el valor del input
+    let valor = valorInput.value; // Obtener el valor del input
 
-    actualizarSaldoTotal();
+    let celda = document.getElementById(cuenta);
+    let nuevoValor = parseFloat(valor.replace(/\./g, "")) || 0;
 
-};
+    if (celda) { // Verifica que la celda exista
+        celda.dataset.valor = nuevoValor;
+        celda.textContent = formatoPesosColombianos(nuevoValor);
+        actualizarSaldoTotal();
+    } else {
+        alert("Cuenta no válida");
+    }
+
+    // ✅ Limpiar campos correctamente
+    cuentaInput.value = "";
+    valorInput.value = "";
+}
+
 
 botonActualizarSaldo.addEventListener("click", actualizarSaldo);
 
@@ -54,7 +66,9 @@ function agregarMovimiento(){
         casillaDescripcion.textContent = descripcion.value;
 
         const casillaValor = document.createElement("td");
-        casillaValor.textContent = parseInt(valorMovimiento.value,10);
+        const valorNumerico = parseFloat(valorMovimiento.value.replace(/\./g, "")) || 0;
+        casillaValor.dataset.valor = valorNumerico;
+        casillaValor.textContent = formatoPesosColombianos(valorNumerico);
 
         const casillaCuenta = document.createElement("td");
         casillaCuenta.textContent = cuentaMovimiento.value;
@@ -71,15 +85,14 @@ function agregarMovimiento(){
 
         //funcionalidad check box
         checkbox.addEventListener("change", ()=>{
+
+            let cuentaAfectada = document.getElementById(casillaCuenta.textContent);
+            let saldoActual = parseFloat(cuentaAfectada.dataset.valor) || 0;
+            let valorMovimiento = parseFloat(casillaValor.dataset.valor) || 0;
+
                 if(checkbox.checked){
                     nuevoMovimiento.style.textDecoration = "line-through";
                     nuevoMovimiento.style.color = "gray";
-
-                    //Obtener datos
-
-                    let cuentaAfectada = document.getElementById(casillaCuenta.textContent);
-                    let saldoActual = parseFloat(cuentaAfectada.dataset.valor);
-                    let valorMovimiento = parseFloat(casillaValor.textContent);
 
                     //actualizar saldo segun naturaleza del movimiento
                     if(casillaTipo.textContent === "ingreso"){
@@ -97,21 +110,16 @@ function agregarMovimiento(){
                     nuevoMovimiento.style.textDecoration = "none";
                     nuevoMovimiento.style.color = "black";
 
-                    let cuentaAfectada = document.getElementById(casillaCuenta.textContent);
-                    let saldoActual = parseFloat(cuentaAfectada.dataset.valor);
-                    let valorMovimiento = parseFloat(casillaValor.textContent);
-
                     if(casillaTipo.textContent === "ingreso"){
                         cuentaAfectada.dataset.valor = saldoActual - valorMovimiento;
                     }else if(casillaTipo.textContent === "egreso"){
                         cuentaAfectada.dataset.valor = saldoActual + valorMovimiento;
                     }
-
-                    cuentaAfectada.textContent = cuentaAfectada.dataset.valor;
                 }
+                cuentaAfectada.textContent = formatoPesosColombianos(cuentaAfectada.dataset.valor);
                 actualizarSaldoTotal();
             }
-        )
+        );
 
         //asignacion de hijos
 
