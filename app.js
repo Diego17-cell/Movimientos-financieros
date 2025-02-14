@@ -10,6 +10,7 @@ valorMovimiento = document.getElementById("valor");
 cuentaMovimiento = document.getElementById("cuenta-afectada");
 botonAgregarMovimiento = document.getElementById("buttonAgregar");
 listaMovimientos = document.getElementById("lista-movimientos");
+saveDataButton = document.getElementById("saveData");
 
 function actualizarSaldoTotal(){
     sumaSaldos = parseFloat(saldoFiducia.dataset.valor) + parseFloat(saldoAhorros.dataset.valor) + parseFloat(saldoEfectivo.dataset.valor);
@@ -17,16 +18,16 @@ function actualizarSaldoTotal(){
 }
 
 function actualizarSaldo() {
-    let cuentaInput = document.getElementById("cuenta-actualizar"); // Obtener el input
-    let valorInput = document.getElementById("valor-actualizar"); // Obtener el input
+    let cuentaInput = document.getElementById("cuenta-actualizar");
+    let valorInput = document.getElementById("valor-actualizar");
     
-    let cuenta = cuentaInput.value; // Obtener el valor del input
-    let valor = valorInput.value; // Obtener el valor del input
+    let cuenta = cuentaInput.value;
+    let valor = valorInput.value;
 
     let celda = document.getElementById(cuenta);
     let nuevoValor = parseFloat(valor.replace(/\./g, "")) || 0;
 
-    if (celda) { // Verifica que la celda exista
+    if (celda) {
         celda.dataset.valor = nuevoValor;
         celda.textContent = formatoPesosColombianos(nuevoValor);
         actualizarSaldoTotal();
@@ -34,11 +35,9 @@ function actualizarSaldo() {
         alert("Cuenta no válida");
     }
 
-    // ✅ Limpiar campos correctamente
     cuentaInput.value = "";
     valorInput.value = "";
 }
-
 
 botonActualizarSaldo.addEventListener("click", actualizarSaldo);
 
@@ -46,123 +45,103 @@ function agregarMovimiento(){
     if(!tipo.value || !fecha.value || !descripcion.value || !valorMovimiento.value || !cuentaMovimiento.value){
         alert("Por favor completa los campos");
         return;
-    }else{
-
-        //creacion de elementos para el nuevo movimiento
-
-        const nuevoMovimiento = document.createElement("tr");
-
-        const checkbox = document.createElement("input");
-        checkbox.type = "checkbox";
-        const casillaCheck = document.createElement("td");
-        
-        const casillaTipo = document.createElement("td");
-        casillaTipo.textContent = tipo.value;
-
-        const casillaFecha = document.createElement("td");
-        casillaFecha.textContent = fecha.value;
-
-        const casillaDescripcion = document.createElement("td");
-        casillaDescripcion.textContent = descripcion.value;
-
-        const casillaValor = document.createElement("td");
-        const valorNumerico = parseFloat(valorMovimiento.value.replace(/\./g, "")) || 0;
-        casillaValor.dataset.valor = valorNumerico;
-        casillaValor.textContent = formatoPesosColombianos(valorNumerico);
-
-        const casillaCuenta = document.createElement("td");
-        casillaCuenta.textContent = cuentaMovimiento.value;
-
-        const botonEliminar = document.createElement("button");
-        botonEliminar.textContent = "eliminar";
-        //funcionalidad de eliminar
-        botonEliminar.addEventListener("click", ()=>{
-                nuevoMovimiento.remove();
-            }
-        );
-
-        const casillaBotonEliminar = document.createElement("td");
-
-        //funcionalidad check box
-        checkbox.addEventListener("change", ()=>{
-
-            let cuentaAfectada = document.getElementById(casillaCuenta.textContent);
-            let saldoActual = parseFloat(cuentaAfectada.dataset.valor) || 0;
-            let valorMovimiento = parseFloat(casillaValor.dataset.valor) || 0;
-
-                if(checkbox.checked){
-                    nuevoMovimiento.style.textDecoration = "line-through";
-                    nuevoMovimiento.style.color = "gray";
-
-                    //actualizar saldo segun naturaleza del movimiento
-                    if(casillaTipo.textContent === "ingreso"){
-                        cuentaAfectada.dataset.valor = saldoActual + valorMovimiento;
-                    }else if(casillaTipo.textContent === "egreso"){
-                        cuentaAfectada.dataset.valor = saldoActual - valorMovimiento;
-                    }
-
-                    cuentaAfectada.textContent = cuentaAfectada.dataset.valor;
-
-                }else{
-
-                    //revertir cambios
-
-                    nuevoMovimiento.style.textDecoration = "none";
-                    nuevoMovimiento.style.color = "black";
-
-                    if(casillaTipo.textContent === "ingreso"){
-                        cuentaAfectada.dataset.valor = saldoActual - valorMovimiento;
-                    }else if(casillaTipo.textContent === "egreso"){
-                        cuentaAfectada.dataset.valor = saldoActual + valorMovimiento;
-                    }
-                }
-                cuentaAfectada.textContent = formatoPesosColombianos(cuentaAfectada.dataset.valor);
-                actualizarSaldoTotal();
-            }
-        );
-
-        //asignacion de hijos
-
-        casillaCheck.appendChild(checkbox);
-
-        casillaBotonEliminar.appendChild(botonEliminar);
-
-        nuevoMovimiento.appendChild(casillaCheck);
-        nuevoMovimiento.appendChild(casillaTipo);
-        nuevoMovimiento.appendChild(casillaFecha);
-        nuevoMovimiento.appendChild(casillaDescripcion);
-        nuevoMovimiento.appendChild(casillaValor);
-        nuevoMovimiento.appendChild(casillaCuenta);
-        nuevoMovimiento.appendChild(casillaBotonEliminar);
-
-        listaMovimientos.appendChild(nuevoMovimiento);
-
-        //limpiar campos
-
-        tipo.value = "";
-        fecha.value = "";
-        descripcion.value = "";
-        valorMovimiento.value = "";
-        cuentaMovimiento.value = "";
     }
+
+    const nuevoMovimiento = document.createElement("tr");
+    nuevoMovimiento.innerHTML = `
+        <td><input type="checkbox" class="checkbox-movimiento"></td>
+        <td>${tipo.value}</td>
+        <td>${fecha.value}</td>
+        <td>${descripcion.value}</td>
+        <td data-valor="${valorMovimiento.value.replace(/\./g, "")}" data-tipo="${tipo.value}">${formatoPesosColombianos(parseFloat(valorMovimiento.value.replace(/\./g, "")) || 0)}</td>
+        <td>${cuentaMovimiento.value}</td>
+        <td><button class="btn-eliminar">eliminar</button></td>
+    `;
+
+    listaMovimientos.appendChild(nuevoMovimiento);
+    asignarEventosMovimiento(nuevoMovimiento);
+
+    tipo.value = "";
+    fecha.value = "";
+    descripcion.value = "";
+    valorMovimiento.value = "";
+    cuentaMovimiento.value = "";
 }
 
 botonAgregarMovimiento.addEventListener("click", agregarMovimiento);
 
-//funcion para dar formato en pesos colombianos separado con . de miles
-function formatoPesosColombianos(valor) {
-    // Asegurarse de que el valor sea un número
-    if (isNaN(valor)) {
-        console.log("El valor ingresado no es un número válido.");
-        return;
-    }
+function asignarEventosMovimiento(movimiento) {
+    let checkbox = movimiento.querySelector(".checkbox-movimiento");
+    let botonEliminar = movimiento.querySelector(".btn-eliminar");
+    let casillaCuenta = movimiento.children[5].textContent;
+    let casillaValor = movimiento.children[4];
+    let cuentaAfectada = document.getElementById(casillaCuenta);
+    let tipoMovimiento = casillaValor.dataset.tipo;
+    
+    checkbox.addEventListener("change", () => {
+        let saldoActual = parseFloat(cuentaAfectada.dataset.valor) || 0;
+        let valorMovimiento = parseFloat(casillaValor.dataset.valor) || 0;
 
-    // Crear el formato de pesos colombianos con separadores de miles
-    const formato = new Intl.NumberFormat('es-CO', {
-        style: 'currency',
-        currency: 'COP'
+        if(checkbox.checked){
+            movimiento.style.textDecoration = "line-through";
+            movimiento.style.color = "gray";
+            cuentaAfectada.dataset.valor = tipoMovimiento === "ingreso" ? saldoActual + valorMovimiento : saldoActual - valorMovimiento;
+        } else {
+            movimiento.style.textDecoration = "none";
+            movimiento.style.color = "black";
+            cuentaAfectada.dataset.valor = tipoMovimiento === "ingreso" ? saldoActual - valorMovimiento : saldoActual + valorMovimiento;
+        }
+        cuentaAfectada.textContent = formatoPesosColombianos(cuentaAfectada.dataset.valor);
+        actualizarSaldoTotal();
     });
 
-    // Retornar el valor formateado
-    return formato.format(valor);
+    botonEliminar.addEventListener("click", () => movimiento.remove());
+}
+
+saveDataButton.addEventListener("click", () => {
+    let datos = {
+        saldos: {
+            fiducia: saldoFiducia.dataset.valor,
+            ahorro: saldoAhorros.dataset.valor,
+            efectivo: saldoEfectivo.dataset.valor
+        },
+        movimientos: Array.from(listaMovimientos.children).map(mov => ({
+            html: mov.innerHTML,
+            checked: mov.querySelector(".checkbox-movimiento").checked
+        }))
+    };
+    localStorage.setItem("datosFinancieros", JSON.stringify(datos));
+});
+
+function cargarDatos() {
+    let datosGuardados = localStorage.getItem("datosFinancieros");
+    if(datosGuardados){
+        let datos = JSON.parse(datosGuardados);
+
+        saldoFiducia.dataset.valor = datos.saldos.fiducia;
+        saldoAhorros.dataset.valor = datos.saldos.ahorro;
+        saldoEfectivo.dataset.valor = datos.saldos.efectivo;
+
+        saldoFiducia.textContent = formatoPesosColombianos(datos.saldos.fiducia);
+        saldoAhorros.textContent = formatoPesosColombianos(datos.saldos.ahorro);
+        saldoEfectivo.textContent = formatoPesosColombianos(datos.saldos.efectivo);
+        actualizarSaldoTotal();
+
+        listaMovimientos.innerHTML = "";
+        datos.movimientos.forEach(movData => {
+            let nuevoMovimiento = document.createElement("tr");
+            nuevoMovimiento.innerHTML = movData.html;
+            listaMovimientos.appendChild(nuevoMovimiento);
+            let checkbox = nuevoMovimiento.querySelector(".checkbox-movimiento");
+            checkbox.checked = movData.checked;
+            asignarEventosMovimiento(nuevoMovimiento);
+        });
+    }
+}
+
+document.addEventListener("DOMContentLoaded", cargarDatos);
+
+function formatoPesosColombianos(valor) {
+    if (isNaN(valor)) return;
+    return new Intl.NumberFormat('es-CO', { style: 'currency', currency: 'COP' }).format(valor);
 }
