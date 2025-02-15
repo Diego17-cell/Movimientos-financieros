@@ -111,6 +111,7 @@ saveDataButton.addEventListener("click", () => {
         }))
     };
     localStorage.setItem("datosFinancieros", JSON.stringify(datos));
+    alert("Datos guardados exitosamente")
 });
 
 function cargarDatos() {
