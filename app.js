@@ -1,4 +1,4 @@
-saldoFiducia = document.getElementById("fiducia");
+saldoInversiones = document.getElementById("inversiones");
 saldoAhorros = document.getElementById("cta-ahorro");
 saldoEfectivo = document.getElementById("efectivo");
 saldoTotal = document.getElementById("saldo-total");
@@ -13,7 +13,7 @@ listaMovimientos = document.getElementById("lista-movimientos");
 saveDataButton = document.getElementById("saveData");
 
 function actualizarSaldoTotal(){
-    sumaSaldos = parseFloat(saldoFiducia.dataset.valor) + parseFloat(saldoAhorros.dataset.valor) + parseFloat(saldoEfectivo.dataset.valor);
+    sumaSaldos = parseFloat(saldoInversiones.dataset.valor) + parseFloat(saldoAhorros.dataset.valor) + parseFloat(saldoEfectivo.dataset.valor);
     saldoTotal.textContent = formatoPesosColombianos(sumaSaldos);
 }
 
@@ -101,7 +101,7 @@ function asignarEventosMovimiento(movimiento) {
 saveDataButton.addEventListener("click", () => {
     let datos = {
         saldos: {
-            fiducia: saldoFiducia.dataset.valor,
+            inversiones: saldoInversiones.dataset.valor,
             ahorro: saldoAhorros.dataset.valor,
             efectivo: saldoEfectivo.dataset.valor
         },
@@ -118,11 +118,11 @@ function cargarDatos() {
     if(datosGuardados){
         let datos = JSON.parse(datosGuardados);
 
-        saldoFiducia.dataset.valor = datos.saldos.fiducia;
+        saldoInversiones.dataset.valor = datos.saldos.inversiones;
         saldoAhorros.dataset.valor = datos.saldos.ahorro;
         saldoEfectivo.dataset.valor = datos.saldos.efectivo;
 
-        saldoFiducia.textContent = formatoPesosColombianos(datos.saldos.fiducia);
+        saldoInversiones.textContent = formatoPesosColombianos(datos.saldos.inversiones);
         saldoAhorros.textContent = formatoPesosColombianos(datos.saldos.ahorro);
         saldoEfectivo.textContent = formatoPesosColombianos(datos.saldos.efectivo);
         actualizarSaldoTotal();
