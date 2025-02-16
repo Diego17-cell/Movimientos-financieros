@@ -4,19 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Movimientos</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <header>
-        <nav class="paginas">
-            <a href="calculadora.html">Calculadora</a>
-            <a href="notas.html">Notas</a>
-            <a href="cronometro.html">Cronometro</a>
-        </nav>
+        <h1>MOVIMIENTOS FINANCIEROS</h1>
     </header>
     <main>
 
         <table border="1" class="saldos">
-            <caption>Saldos</caption>
+            <caption><strong>SALDOS</strong></caption>
             <thead>
                 <tr>
                     <th>INVERSIONES</th>
@@ -41,14 +38,14 @@
 
             <legend><h3>Ajustar saldo</h3></legend>
 
-            <label for="cuenta-actualizar">Cuenta a actualizar: </label>
+            <label for="cuenta-actualizar"><strong>Cuenta a actualizar:</strong></label>
             <select name="actualizarCuenta" id="cuenta-actualizar">
                 <option value="efectivo">efectivo</option>
                 <option value="cta-ahorro">cta-ahorro</option>
                 <option value="inversiones">inversiones</option>
             </select>
 
-            <label for="valor-actualizar">Valor a actualizar: </label>
+            <label for="valor-actualizar"><strong>Valor a actualizar:</strong></label>
             <input id="valor-actualizar" type="number">
 
             <button id="guardar-saldos">Actualizar saldo</button>
@@ -58,22 +55,22 @@
         <fieldset id = "movimientos">
             <legend><h3>Registro de movimientos</h3></legend>
 
-            <label for="tipo"></label>
+            <label for="tipo"><strong>Tipo:</strong></label>
             <select name="naturaleza" id="tipo">
                 <option value="egreso">Egreso</option>
                 <option value="ingreso">Ingreso</option>
             </select>
 
-            <label for="fecha">Fecha:</label>
+            <label for="fecha"><strong>Fecha:</strong></label>
             <input type="date" id="fecha" name="fecha">
             
-            <label for="descripcion">Descripción:</label>
+            <label for="descripcion"><strong>Descripción:</strong></label>
             <input type="text" id="descripcion" name="descripcion" placeholder="Describe obligación">
             
-            <label for="valor">Valor:</label>
+            <label for="valor"><strong>Valor:</strong></label>
             <input type="number" id="valor" name="valor">
             
-            <label for="cuenta-afectada">Cuenta:</label>
+            <label for="cuenta-afectada"><strong>Cuenta:</strong></label>
             <select name="cuenta" id="cuenta-afectada">
                 <option value="cta-ahorro">cta-ahorro</option>
                 <option value="efectivo">efectivo</option>
@@ -84,7 +81,7 @@
         </fieldset>
 
         <table border="1">
-            <caption>Movimientos registrados</caption>
+            <caption><strong>MOVIMIENTOS REGISTRADOS</strong></caption>
             <thead>
                 <tr>
                     <th>Chequeo</th>
