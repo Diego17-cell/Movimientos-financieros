@@ -1,4 +1,10 @@
 /* Estilos generales */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
 body {
     font-family: Arial, sans-serif;
     background-color: #f4f4f4;
@@ -8,6 +14,7 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
+    width: 100%;
 }
 
 /* Encabezado */
@@ -16,13 +23,20 @@ header {
     color: white;
     width: 100%;
     text-align: center;
-    padding: 15px 0;
+    padding: 15px 10px;
     font-size: 1.5rem;
+}
+
+/* Contenedor para hacer las tablas desplazables en móviles */
+.table-container {
+    width: 100%;
+    overflow-x: auto;
+    padding: 10px;
 }
 
 /* Tablas */
 table {
-    width: 90%;
+    width: 100%;
     max-width: 600px;
     border-collapse: collapse;
     margin: 20px 0;
@@ -30,6 +44,8 @@ table {
     border-radius: 8px;
     overflow: hidden;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    table-layout: fixed;
+    word-wrap: break-word;
 }
 
 caption {
@@ -40,9 +56,9 @@ caption {
     color: white;
 }
 
-/* Estilo diferenciado para encabezados de tabla */
+/* Encabezados de tabla */
 th {
-    background-color: #c7d1d8; /* Color azul oscuro para diferenciar */
+    background-color: #c7d1d8;
     color: black;
     padding: 12px;
     text-align: center;
@@ -58,7 +74,7 @@ td {
 
 /* Formularios y campos */
 fieldset {
-    width: 90%;
+    width: 100%;
     max-width: 500px;
     border: 1px solid #bdc3c7;
     padding: 15px;
@@ -114,12 +130,26 @@ button:active {
 
 /* Responsividad */
 @media (max-width: 600px) {
-    table, fieldset {
-        width: 100%;
+    header {
+        font-size: 1.2rem;
+        padding: 12px;
+    }
+
+    .table-container {
+        padding: 5px;
+    }
+
+    table {
+        font-size: 0.9rem;
     }
 
     th, td {
-        font-size: 0.9rem;
+        font-size: 0.8rem;
+        padding: 8px;
+    }
+
+    fieldset {
+        padding: 10px;
     }
 
     button {
