@@ -1,103 +1,79 @@
-/* Estilos generales */
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
-    color: #333;
+/* Reset de estilos básicos */
+* {
     margin: 0;
     padding: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
 }
 
-/* Encabezado */
-header {
-    background-color: #2c3e50;
-    color: white;
-    width: 100%;
-    text-align: center;
-    padding: 15px 0;
-    font-size: 1.5rem;
+/* Estilos generales */
+body {
+    background-color: #ebedf2; /* Gris muy claro */
+    color: #4e4e4e; /* Gris oscuro para el texto */
+    text-align: center; /* Centra todo el contenido */
+    padding: 20px;
 }
 
-/* Tablas */
+/* Estilos para el encabezado principal */
+header h1 {
+    font-size: 2.2rem;
+    margin-bottom: 20px;
+    color: #2c3e50; /* Gris oscuro */
+}
+
+/* Estilos para las tablas */
 table {
-    width: 90%;
-    max-width: 600px;
+    width: 100%;
+    max-width: 800px;
+    margin: 20px auto;
     border-collapse: collapse;
-    margin: 20px 0;
-    background-color: white;
+    background: #fff; /* Fondo blanco */
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.05);
     border-radius: 8px;
-    overflow: hidden;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
 }
 
+/* Estilo para los títulos de las tablas (sin fondo) */
 caption {
-    font-size: 1.2rem;
+    font-size: 1.5rem;
     font-weight: bold;
-    padding: 10px;
-    background-color: #34495e;
-    color: white;
+    margin-bottom: 8px;
+    color: #34495e; /* Gris oscuro */
 }
 
-/* Estilo diferenciado para encabezados de tabla */
+/* Encabezados de tabla */
 th {
-    background-color: #c7d1d8; /* Color para diferenciar */
-    color: black;
+    background-color: #2c3e50; /* Gris oscuro */
+    color: white; /* Letra blanca */
+    font-size: 1.1rem; /* Tamaño de texto de los encabezados */
+    text-transform: uppercase;
     padding: 12px;
     text-align: center;
-    border-bottom: 2px solid #f4f4f4;
-    font-size: clamp(0.8rem, 2vw, 1rem); /* Ajuste dinámico del tamaño */
-    min-width: 80px; /* Evita que las celdas sean demasiado pequeñas */
-    word-wrap: break-word;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
 }
 
-/* Celdas */
+/* Estilo para los datos de la tabla */
 td {
-    padding: 10px;
+    background-color: #fff; /* Fondo blanco para las celdas */
+    color: #333; /* Letra negra */
+    font-size: 1rem; /* Tamaño de texto de las celdas */
+    padding: 12px;
     text-align: center;
-    border-bottom: 1px solid #ddd;
+    border: 1px solid #dcdcdc; /* Gris suave para los bordes */
 }
 
-/* Formularios y campos */
-fieldset {
-    width: 90%;
-    max-width: 500px;
-    border: 1px solid #bdc3c7;
-    padding: 15px;
-    margin: 15px 0;
-    background-color: white;
-    border-radius: 8px;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+#saldo-total {
+    font-weight: bold; /* Para poner la letra en negrita */
 }
 
-legend {
-    font-size: 1.2rem;
-    font-weight: bold;
-    color: #2c3e50;
+
+/* Ajustes específicos para la tabla de movimientos */
+table:last-of-type th, table:last-of-type td {
+    font-size: 0.8rem;
+    font-weight: normal;
 }
 
-label {
-    display: block;
-    margin-top: 10px;
-    font-weight: bold;
-}
-
-input, select {
-    width: 100%;
-    padding: 8px;
-    margin-top: 5px;
-    border: 1px solid #bdc3c7;
-    border-radius: 4px;
-    font-size: 1rem;
-}
-
-/* Botones */
+/* Ajuste para los botones */
 button {
-    width: 100%;
+    width: auto; /* Ajusta el ancho al tamaño del texto */
     padding: 10px;
     margin-top: 15px;
     font-size: 1rem;
@@ -110,30 +86,64 @@ button {
 }
 
 button:hover {
-    background-color: #1a252f;
-    transform: scale(1.05);
+    transform: scale(1.1); /* Aumenta ligeramente el tamaño del botón */
+    transition: transform 0.3s ease; /* Transición suave para el efecto */
 }
 
-button:active {
-    transform: scale(0.98);
+
+/* Estilos para los fieldset */
+fieldset {
+    width: 100%;
+    max-width: 500px;
+    margin: 20px auto;
+    padding: 15px;
+    border: 1px solid #dcdcdc;
+    background: #fff;
+    border-radius: 8px;
 }
 
-/* Responsividad */
+legend h3 {
+    font-size: 1.2rem;
+    color: #2c3e50; /* Gris suave para los títulos de los formularios */
+}
+
+/* Estilos para los inputs y select */
+input, select {
+    width: 100%;
+    padding: 8px;
+    margin: 5px 0;
+    border: 1px solid #dcdcdc;
+    border-radius: 4px;
+    background-color: #ebedf2; /* Fondo gris suave */
+}
+
+/* Alineación de todo el formulario y tabla */
+fieldset, table {
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+
+/* Estilo para la tabla de movimientos registrados */
+table:last-of-type caption {
+    font-size: 1.3rem;
+    color: #34495e; /* Gris oscuro para la descripción */
+}
+
+/* Ajustes responsivos */
 @media (max-width: 600px) {
-    table, fieldset {
+    table {
         width: 100%;
     }
 
-    th {
-        font-size: clamp(0.7rem, 3vw, 0.9rem); /* Ajuste más pequeño en móviles */
-        padding: 8px;
-    }
-
-    td {
-        font-size: 0.9rem;
+    th, td {
+        padding: 10px; /* Espaciado más pequeño en pantallas pequeñas */
+        font-size: 1rem; /* Tamaño de texto ajustado */
     }
 
     button {
-        font-size: 0.9rem;
+        width: auto; /* Se asegura que en móvil el botón no ocupe todo el ancho */
+        padding: 8px 15px; /* Ajusta el relleno del botón */
+        font-size: 0.9rem; /* Ajusta el tamaño del texto en móvil */
     }
 }
