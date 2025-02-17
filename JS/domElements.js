@@ -1,0 +1,13 @@
+export const saldoInversiones = document.getElementById("inversiones");
+export const saldoAhorros = document.getElementById("cta-ahorro");
+export const saldoEfectivo = document.getElementById("efectivo");
+export const saldoTotal = document.getElementById("saldo-total");
+export const botonActualizarSaldo = document.getElementById("guardar-saldos");
+export const tipo = document.getElementById("tipo");
+export const fecha = document.getElementById("fecha");
+export const descripcion = document.getElementById("descripcion");
+export const valorMovimiento = document.getElementById("valor");
+export const cuentaMovimiento = document.getElementById("cuenta-afectada");
+export const botonAgregarMovimiento = document.getElementById("buttonAgregar");
+export const listaMovimientos = document.getElementById("lista-movimientos");
+export const saveDataButton = document.getElementById("saveData");
