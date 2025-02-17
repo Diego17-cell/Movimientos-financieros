@@ -14,13 +14,6 @@ body {
     padding: 20px;
 }
 
-/* Estilos para el encabezado principal */
-header h1 {
-    font-size: 2.2rem;
-    margin-bottom: 20px;
-    color: #2c3e50; /* Gris oscuro */
-}
-
 /* Estilos para las tablas */
 table {
     width: 100%;
