@@ -55,7 +55,7 @@ function agregarMovimiento(){
         <td>${descripcion.value}</td>
         <td data-valor="${valorMovimiento.value.replace(/\./g, "")}" data-tipo="${tipo.value}">${formatoPesosColombianos(parseFloat(valorMovimiento.value.replace(/\./g, "")) || 0)}</td>
         <td>${cuentaMovimiento.value}</td>
-        <td><button class="btn-eliminar">eliminar</button></td>
+        <td><button class="btn-eliminar">X</button></td>
     `;
 
     listaMovimientos.appendChild(nuevoMovimiento);

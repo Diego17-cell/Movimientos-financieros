@@ -1,10 +1,4 @@
 /* Estilos generales */
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
-
 body {
     font-family: Arial, sans-serif;
     background-color: #f4f4f4;
@@ -14,7 +8,6 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 100%;
 }
 
 /* Encabezado */
@@ -23,20 +16,13 @@ header {
     color: white;
     width: 100%;
     text-align: center;
-    padding: 15px 10px;
+    padding: 15px 0;
     font-size: 1.5rem;
-}
-
-/* Contenedor para hacer las tablas desplazables en móviles */
-.table-container {
-    width: 100%;
-    overflow-x: auto;
-    padding: 10px;
 }
 
 /* Tablas */
 table {
-    width: 100%;
+    width: 90%;
     max-width: 600px;
     border-collapse: collapse;
     margin: 20px 0;
@@ -44,8 +30,6 @@ table {
     border-radius: 8px;
     overflow: hidden;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-    table-layout: fixed;
-    word-wrap: break-word;
 }
 
 caption {
@@ -56,13 +40,19 @@ caption {
     color: white;
 }
 
-/* Encabezados de tabla */
+/* Estilo diferenciado para encabezados de tabla */
 th {
-    background-color: #c7d1d8;
+    background-color: #c7d1d8; /* Color para diferenciar */
     color: black;
     padding: 12px;
     text-align: center;
     border-bottom: 2px solid #f4f4f4;
+    font-size: clamp(0.8rem, 2vw, 1rem); /* Ajuste dinámico del tamaño */
+    min-width: 80px; /* Evita que las celdas sean demasiado pequeñas */
+    word-wrap: break-word;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 /* Celdas */
@@ -74,7 +64,7 @@ td {
 
 /* Formularios y campos */
 fieldset {
-    width: 100%;
+    width: 90%;
     max-width: 500px;
     border: 1px solid #bdc3c7;
     padding: 15px;
@@ -130,26 +120,17 @@ button:active {
 
 /* Responsividad */
 @media (max-width: 600px) {
-    header {
-        font-size: 1.2rem;
-        padding: 12px;
+    table, fieldset {
+        width: 100%;
     }
 
-    .table-container {
-        padding: 5px;
-    }
-
-    table {
-        font-size: 0.9rem;
-    }
-
-    th, td {
-        font-size: 0.8rem;
+    th {
+        font-size: clamp(0.7rem, 3vw, 0.9rem); /* Ajuste más pequeño en móviles */
         padding: 8px;
     }
 
-    fieldset {
-        padding: 10px;
+    td {
+        font-size: 0.9rem;
     }
 
     button {
