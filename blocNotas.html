@@ -1,28 +1,38 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bloc Notas</title>
+    <title>Bloc de Notas</title>
 </head>
 <body>
-    <label for="nombreNota">Nombre Nota</label>
+
+    <h1>Bloc de Notas</h1>
+
+    <label for="nombreNota">Nombre de la Nota:</label>
     <input id="nombreNota" type="text" placeholder="Ingresa el nombre de la nota">
-    <button>Crear Nota</button>
+    <button id="crearNota">Crear Nota</button>
+
     <fieldset>
-        <legend>Notas guardadas</legend>
-            <details>
-                <summary>Nombre nota 1</summary>
-                <p> descripcion nota 1</p>
-                <button>guardar informacion</button>
-                <button>eliminar nota</button>
+        <legend>Notas Guardadas</legend>
+        <div id="notasContainer">
+            <!--  EJEMPLO
+            <details class="nota">
+                <summary>Nombre Nota 1</summary>
+                <textarea rows="5" placeholder="Escribe aquí tu nota..."></textarea>
+                <button class="eliminarNota">Eliminar Nota</button>
             </details>
-            <details>
+            <details class="nota">
                 <summary>Nombre Nota 2</summary>
-                <p> descripcion nota 2</p>
-                <button>guardar informacion</button>
-                <button>eliminar nota</button>
-            </details>
+                <textarea rows="5" placeholder="Escribe aquí tu nota..."></textarea>
+                <button class="eliminarNota">Eliminar Nota</button>
+            </details> 
+            -->
+        </div>
     </fieldset>
+
+    <button id="buttonGuardarNotas">Guardar notas</button>
+
+    <script src="JS/bloc.js"></script>
 </body>
 </html>
