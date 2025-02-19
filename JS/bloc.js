@@ -38,6 +38,7 @@ function guardarNotas() {
     });
 
     localStorage.setItem("notas", JSON.stringify(notas));
+    alert("Datos guardados exitosamente");
 }
 
 // Función para cargar notas desde localStorage
